@@ -11,3 +11,6 @@ p, li {
     font-size: 1.5em;
     line-height: 1.5em;
 }
+.reveal .roll {
+    line-height: 1.5em;
+}
