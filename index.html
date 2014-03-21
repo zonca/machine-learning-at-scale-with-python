@@ -1814,7 +1814,7 @@ In&nbsp;[1]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[3]:
+In&nbsp;[1]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
@@ -1833,7 +1833,7 @@ In&nbsp;[3]:
 
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Login at https://console.aws.amazon.com/iam/home?#users</li>
+<li>Login at <a href="https://console.aws.amazon.com/iam/home?#users">https://console.aws.amazon.com/iam/home?#users</a></li>
 <li>Create new user</li>
 <li>Download credentials as <code>credentials.csv</code></li>
 <li>Add Full EC2 and S3 permissions under Permissions <img src="screenshots/aws-create-user.png" alt="AWS create user" /></li>
@@ -1842,7 +1842,7 @@ In&nbsp;[3]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In&nbsp;[2]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -1858,7 +1858,7 @@ In&nbsp;[4]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In&nbsp;[3]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;aws info&quot;</span><span class="p">)</span>
@@ -1879,7 +1879,7 @@ In&nbsp;[5]:
 
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>From EC2 console: https://console.aws.amazon.com/ec2</li>
+<li>From EC2 console: <a href="https://console.aws.amazon.com/ec2">https://console.aws.amazon.com/ec2</a></li>
 <li>Click on Key Pairs</li>
 <li>Create new Key Pair named <code>starcluster</code></li>
 <li>Move <code>starcluster.pem</code> in your working folder</li>
@@ -1889,7 +1889,7 @@ In&nbsp;[5]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[6]:
+In&nbsp;[4]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="c"># key pairs are region-specific</span>
@@ -1906,14 +1906,19 @@ In&nbsp;[6]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[7]:
+In&nbsp;[20]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
 <span class="k">def</span> <span class="nf">write_sc_conf</span><span class="p">(</span><span class="n">sc_conf</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Write starcluster configuration to ~/.starcluster/config&quot;&quot;&quot;</span>
-    <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home</span><span class="p">,</span> <span class="s">&quot;.starcluster&quot;</span><span class="p">,</span> <span class="s">&quot;config&quot;</span><span class="p">),</span> <span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~&quot;</span><span class="p">),</span> <span class="s">&quot;.starcluster&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="s">&quot;config&quot;</span><span class="p">),</span> <span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 
@@ -1924,7 +1929,7 @@ In&nbsp;[7]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[9]:
+In&nbsp;[21]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">write_sc_conf</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
@@ -1943,7 +1948,7 @@ In&nbsp;[9]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[7]:
+In&nbsp;[22]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="o">%%</span><span class="k">bash</span>
@@ -1958,26 +1963,9 @@ In&nbsp;[7]:
 
 
 <div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-64bit Images:
-[0] ami-04bedf34 us-west-2 starcluster-base-ubuntu-13.04-x86_64 (EBS)
-[1] ami-80bedfb0 us-west-2 starcluster-base-ubuntu-13.04-x86_64-hvm (HVM-EBS)
-[2] ami-486afe78 us-west-2 starcluster-base-ubuntu-12.04-x86_64-hvm (HVM-EBS)
-[3] ami-706afe40 us-west-2 starcluster-base-ubuntu-12.04-x86_64 (EBS)
-[4] ami-c6bd30f6 us-west-2 starcluster-base-ubuntu-11.10-x86_64 (EBS)
-
-</pre>
-</div>
-</div>
-
-<div class="hbox output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stderr">
 <pre>
-StarCluster - (http://star.mit.edu/cluster) (v. 0.95.2)
-Software Tools for Academics and Researchers (STAR)
-Please submit bug reports to starcluster@mit.edu
-
+bash: line 1: starcluster: command not found
 
 </pre>
 </div>
@@ -1996,7 +1984,7 @@ Please submit bug reports to starcluster@mit.edu
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[8]:
+In&nbsp;[23]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">sec</span> <span class="o">=</span> <span class="s">&quot;cluster pyec2&quot;</span>
@@ -2019,7 +2007,7 @@ In&nbsp;[8]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[9]:
+In&nbsp;[24]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;global&quot;</span><span class="p">)</span>
@@ -2033,7 +2021,7 @@ In&nbsp;[9]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[10]:
+In&nbsp;[25]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">write_sc_conf</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
@@ -2116,7 +2104,7 @@ mke2fs 1.42 (29-Nov-2011)
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[12]:
+In&nbsp;[28]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s">&quot;volume data&quot;</span><span class="p">)</span>
@@ -2125,7 +2113,7 @@ In&nbsp;[12]:
 <span class="c"># the path to mount this EBS volume on</span>
 <span class="c"># (this path will also be nfs shared to all nodes in the cluster)</span>
 <span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;volume data&quot;</span><span class="p">,</span> <span class="s">&quot;mount_path&quot;</span><span class="p">,</span> <span class="s">&quot;/data&quot;</span><span class="p">)</span>
-<span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;cluster ipcluster&quot;</span><span class="p">,</span> <span class="s">&quot;volumes&quot;</span><span class="p">,</span> <span class="s">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;cluster pyec2&quot;</span><span class="p">,</span> <span class="s">&quot;volumes&quot;</span><span class="p">,</span> <span class="s">&quot;data&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2135,7 +2123,7 @@ In&nbsp;[12]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[13]:
+In&nbsp;[29]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">write_sc_conf</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
@@ -2159,7 +2147,7 @@ In&nbsp;[13]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[14]:
+In&nbsp;[30]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">sec</span> <span class="o">=</span> <span class="s">&quot;plugin ipcluster&quot;</span>
@@ -2189,7 +2177,7 @@ In&nbsp;[14]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[15]:
+In&nbsp;[31]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">write_sc_conf</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
@@ -2208,7 +2196,7 @@ In&nbsp;[15]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[32]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="o">%%</span><span class="k">bash</span>
@@ -2218,145 +2206,262 @@ In&nbsp;[]:
 </div>
 </div>
 
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<pre><code>&gt;&gt;&gt; Using default cluster template: testcluster
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+&gt;&gt;&gt; Using default cluster template: pyec2
 &gt;&gt;&gt; Validating cluster template settings...
 &gt;&gt;&gt; Cluster template settings are valid
 &gt;&gt;&gt; Starting cluster...
 &gt;&gt;&gt; Launching a 1-node cluster...
-&gt;&gt;&gt; Creating security group @sc-testcluster...
-Reservation:r-22b9a72b
+&gt;&gt;&gt; Creating security group @sc-pyec2...
+&gt;&gt;&gt; Waiting for security group @sc-pyec2...  | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / 
+Reservation:r-02948d0b
 &gt;&gt;&gt; Waiting for cluster to come up... (updating every 30s)
-&gt;&gt;&gt; Waiting for all nodes to be in a &#39;running&#39; state...
+&gt;&gt;&gt; Waiting for all nodes to be in a &apos;running&apos; state...
 &gt;&gt;&gt; Waiting for SSH to come up on all nodes...
-&gt;&gt;&gt; Waiting for cluster to come up took 1.063 mins
-&gt;&gt;&gt; The master node is ec2-54-186-168-4.us-west-2.compute.amazonaws.com
+&gt;&gt;&gt; Waiting for cluster to come up took 1.057 mins
+&gt;&gt;&gt; The master node is ec2-54-186-36-53.us-west-2.compute.amazonaws.com
 &gt;&gt;&gt; Configuring cluster...
 &gt;&gt;&gt; Attaching volume vol-53829851 to master node on /dev/sdz ...
 &gt;&gt;&gt; Waiting for vol-53829851 to transition to: attached...  | / - \ - | 
 &gt;&gt;&gt; Running plugin starcluster.clustersetup.DefaultClusterSetup
 &gt;&gt;&gt; Configuring hostnames...
 &gt;&gt;&gt; Mounting EBS volume vol-53829851 on /data...
-&gt;&gt;&gt; Creating cluster user: sgeadmin (uid: 1001, gid: 1001)
-&gt;&gt;&gt; Configuring scratch space for user(s): sgeadmin
+&gt;&gt;&gt; Creating cluster user: ipuser (uid: 1001, gid: 1001)
+&gt;&gt;&gt; Configuring scratch space for user(s): ipuser
 &gt;&gt;&gt; Configuring /etc/hosts on each node
 &gt;&gt;&gt; Starting NFS server on master
-&gt;&gt;&gt; Setting up NFS took 0.029 mins
+&gt;&gt;&gt; Setting up NFS took 0.031 mins
 &gt;&gt;&gt; Configuring passwordless ssh for root
-&gt;&gt;&gt; Configuring passwordless ssh for sgeadmin
-&gt;&gt;&gt; Running plugin starcluster.plugins.sge.SGEPlugin
-&gt;&gt;&gt; Configuring SGE...
-&gt;&gt;&gt; Setting up NFS took 0.000 mins
-&gt;&gt;&gt; Installing Sun Grid Engine...
-&gt;&gt;&gt; Creating SGE parallel environment &#39;orte&#39;
-&gt;&gt;&gt; Adding parallel environment &#39;orte&#39; to queue &#39;all.q&#39;
+&gt;&gt;&gt; Configuring passwordless ssh for ipuser
+&gt;&gt;&gt; Running plugin pypackages
+&gt;&gt;&gt; Installing Python packages on all nodes:
+&gt;&gt;&gt; $ pip install scikit-learn
+&gt;&gt;&gt; $ pip install psutil
+&gt;&gt;&gt; PyPkgInstaller took 2.622 mins
 &gt;&gt;&gt; Running plugin ipcluster
 &gt;&gt;&gt; Writing IPython cluster config files
 &gt;&gt;&gt; Starting the IPython controller and 1 engines on master
-&gt;&gt;&gt; Waiting for JSON connector file...  | / - 
+&gt;&gt;&gt; Waiting for JSON connector file...  | / 
 &gt;&gt;&gt; Creating IPCluster cache directory: /home/zonca/.starcluster/ipcluster
 &gt;&gt;&gt; Authorizing tcp ports [1000-65535] on 0.0.0.0/0 for: IPython controller
-&gt;&gt;&gt; Setting up IPython web notebook for user: sgeadmin
-&gt;&gt;&gt; Creating SSL certificate for user sgeadmin
+&gt;&gt;&gt; Setting up IPython web notebook for user: ipuser
+&gt;&gt;&gt; Creating SSL certificate for user ipuser
 &gt;&gt;&gt; Authorizing tcp ports [8888-8888] on 0.0.0.0/0 for: notebook
-&gt;&gt;&gt; IPython notebook URL: https://ec2-54-186-168-4.us-west-2.compute.amazonaws.com:8888
+&gt;&gt;&gt; IPython notebook URL: https://ec2-54-186-36-53.us-west-2.compute.amazonaws.com:8888
 &gt;&gt;&gt; The notebook password is: mysupersecretpassword
-*** WARNING - Please check your local firewall settings if you&#39;re having
+*** WARNING - Please check your local firewall settings if you&apos;re having
 *** WARNING - issues connecting to the IPython notebook
-&gt;&gt;&gt; IPCluster has been started on SecurityGroup:@sc-testcluster for user &#39;sgeadmin&#39;
+&gt;&gt;&gt; IPCluster has been started on SecurityGroup:@sc-pyec2 for user &apos;ipuser&apos;
 with 1 engines on 1 nodes.
 
 To connect to cluster from your local machine use:
 
 from IPython.parallel import Client
-client = Client(&#39;/home/zonca/.starcluster/ipcluster/SecurityGroup:@sc-testcluster-us-west-2.json&#39;, sshkey=&#39;starcluster.pem&#39;)
+client = Client(&apos;/home/zonca/.starcluster/ipcluster/SecurityGroup:@sc-pyec2-us-west-2.json&apos;, sshkey=&apos;starcluster.pem&apos;)
 
 See the IPCluster plugin doc for usage details:
 http://star.mit.edu/cluster/docs/latest/plugins/ipython.html
 
-&gt;&gt;&gt; IPCluster took 0.384 mins
-&gt;&gt;&gt; Configuring cluster took 1.276 mins
-&gt;&gt;&gt; Starting cluster took 2.382 mins
+&gt;&gt;&gt; IPCluster took 0.364 mins
+&gt;&gt;&gt; Configuring cluster took 3.475 mins
+&gt;&gt;&gt; Starting cluster took 7.204 mins
 
 The cluster is now ready to use. To login to the master node
 as root, run:
 
-    $ starcluster sshmaster testcluster
+    $ starcluster sshmaster pyec2
 
-If you&#39;re having issues with the cluster you can reboot the
+If you&apos;re having issues with the cluster you can reboot the
 instances and completely reconfigure the cluster from
 scratch using:
 
-    $ starcluster restart testcluster
+    $ starcluster restart pyec2
 
-When you&#39;re finished using the cluster and wish to terminate
+When you&apos;re finished using the cluster and wish to terminate
 it and stop paying for service:
 
-    $ starcluster terminate testcluster
+    $ starcluster terminate pyec2
 
 Alternatively, if the cluster uses EBS instances, you can
-use the &#39;stop&#39; command to shutdown all nodes and put them
-into a &#39;stopped&#39; state preserving the EBS volumes backing
+use the &apos;stop&apos; command to shutdown all nodes and put them
+into a &apos;stopped&apos; state preserving the EBS volumes backing
 the nodes:
 
-    $ starcluster stop testcluster
+    $ starcluster stop pyec2
 
 WARNING: Any data stored in ephemeral storage (usually /mnt)
 will be lost!
 
-You can activate a &#39;stopped&#39; cluster by passing the -x
-option to the &#39;start&#39; command:
+You can activate a &apos;stopped&apos; cluster by passing the -x
+option to the &apos;start&apos; command:
 
-    $ starcluster start -x testcluster
+    $ starcluster start -x pyec2
 
-This will start all &#39;stopped&#39; nodes and reconfigure the
+This will start all &apos;stopped&apos; nodes and reconfigure the
 cluster.
-StarCluster - (http://star.mit.edu/cluster) (v. 0.95.2)
+
+</pre>
+</div>
+</div>
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stderr">
+<pre>
+StarCluster - (http://star.mit.edu/cluster) (v. 0.95.3)
 Software Tools for Academics and Researchers (STAR)
 Please submit bug reports to starcluster@mit.edu
 
-1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
-1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
-1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
-1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
-1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
-1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
-1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
-/home/zonca/.starcluster/ipcluster/SecurityGroup:@sc-testcluster-us-west-2.json 100% || Time: 00:00:00   3.09 K/s</code></pre>
-</div></section><section>
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>starcluster sshmaster -A -u ipuser</code> # -A use local keys remotely</li>
-<li></li>
-</ul>
-</div></section><section>
+0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
+0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
+0/1 |                                                                  |   0%  1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
+0/1 |                                                                  |   0%  1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
+0/1 |                                                                  |   0%  1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
+0/1 |                                                                  |   0%  1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
+0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  0/1 |                                                                  |   0%  1/1 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100%  
+/home/zonca/.starcluster/ipcluster/SecurityGroup:@sc-pyec2-us-west-2.json   0% || ETA:  --:--:--   0.00 B/s/home/zonca/.starcluster/ipcluster/SecurityGroup:@sc-pyec2-us-west-2.json 100% || Time: 00:00:00   2.96 K/s
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[37]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="o">%%</span><span class="k">bash</span>
-<span class="n">starcluster</span> <span class="n">terminate</span> <span class="n">ipcluster</span>
+<span class="n">starcluster</span> <span class="n">sshmaster</span> <span class="o">-</span><span class="n">A</span> <span class="n">pyec2</span> <span class="c"># -A use local keys remotely</span>
 </pre></div>
 
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+          _                 _           _
+__/\_____| |_ __ _ _ __ ___| |_   _ ___| |_ ___ _ __
+\    / __| __/ _&#96; | &apos;__/ __| | | | / __| __/ _ \ &apos;__|
+/_  _\__ \ || (_| | | | (__| | |_| \__ \ ||  __/ |
+  \/ |___/\__\__,_|_|  \___|_|\__,_|___/\__\___|_|
+
+StarCluster Ubuntu 12.04 AMI
+Software Tools for Academics and Researchers (STAR)
+Homepage: http://star.mit.edu/cluster
+Documentation: http://star.mit.edu/cluster/docs/latest
+Code: https://github.com/jtriley/StarCluster
+Mailing list: starcluster@mit.edu
+
+This AMI Contains:
+
+  * Open Grid Scheduler (OGS - formerly SGE) queuing system
+  * Condor workload management system
+  * OpenMPI compiled with Open Grid Scheduler support
+  * OpenBLAS- Highly optimized Basic Linear Algebra Routines
+  * NumPy/SciPy linked against OpenBlas
+  * IPython 0.13 with parallel support
+  * and more! (use &apos;dpkg -l&apos; to show all installed packages)
+
+Open Grid Scheduler/Condor cheat sheet:
+
+  * qstat/condor_q - show status of batch jobs
+  * qhost/condor_status- show status of hosts, queues, and jobs
+  * qsub/condor_submit - submit batch jobs (e.g. qsub -cwd ./job.sh)
+  * qdel/condor_rm - delete batch jobs (e.g. qdel 7)
+  * qconf - configure Open Grid Scheduler system
+
+Current System Stats:
+
+  System load:  0.06              Processes:           93
+  Usage of /:   27.8% of 9.84GB   Users logged in:     1
+  Memory usage: 60%               IP address for eth0: 172.31.17.235
+  Swap usage:   0%
+
+
+</pre>
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<pre><code>StarCluster - (http://star.mit.edu/cluster) (v. 0.95.2)
+</div>
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stderr">
+<pre>
+StarCluster - (http://star.mit.edu/cluster) (v. 0.95.3)
 Software Tools for Academics and Researchers (STAR)
 Please submit bug reports to starcluster@mit.edu
-Terminate EBS cluster testcluster (y/n)? y
+
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+stdin: is not a tty
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section><section>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[39]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">%%</span><span class="k">bash</span>
+<span class="n">starcluster</span> <span class="n">terminate</span> <span class="o">-</span><span class="n">c</span> <span class="n">pyec2</span> <span class="c"># -c does not prompt for confirm</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
 &gt;&gt;&gt; Running plugin starcluster.plugins.ipcluster.IPCluster
-&gt;&gt;&gt; Running plugin starcluster.plugins.sge.SGEPlugin
+&gt;&gt;&gt; Running plugin starcluster.plugins.pypkginstaller.PyPkgInstaller
 &gt;&gt;&gt; Running plugin starcluster.clustersetup.DefaultClusterSetup
 &gt;&gt;&gt; Detaching volume vol-53829851 from master
-&gt;&gt;&gt; Terminating node: master (i-90896998)
-&gt;&gt;&gt; Waiting for cluster to terminate... 
-&gt;&gt;&gt; Removing security group: @sc-testcluster </code></pre>
+&gt;&gt;&gt; Terminating node: master (i-1d9a7915)
+&gt;&gt;&gt; Waiting for cluster to terminate...  | 
+&gt;&gt;&gt; Removing security group: @sc-pyec2  | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - | / - \ - 
+
+</pre>
+</div>
+</div>
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stderr">
+<pre>
+StarCluster - (http://star.mit.edu/cluster) (v. 0.95.3)
+Software Tools for Academics and Researchers (STAR)
+Please submit bug reports to starcluster@mit.edu
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div></section>
     </section><section>
     <section>
@@ -2409,7 +2514,7 @@ Terminate EBS cluster testcluster (y/n)? y
 <li><code>sklearn.ensemble.RandomForestClassifier(n_jobs=-1)</code></li>
 </ul>
 <p>Just set <code>n_jobs</code> to the number of processes or -1 for automatically set it to the number of cores.</p>
-<p>Multi-core support provided by <code>joblib</code>: https://pythonhosted.org/joblib/parallel.html</p>
+<p>Multi-core support provided by <code>joblib</code>: <a href="https://pythonhosted.org/joblib/parallel.html">https://pythonhosted.org/joblib/parallel.html</a></p>
 </div></section>
     </section><section>
     <section>
@@ -2485,7 +2590,7 @@ In&nbsp;[]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="o">%%</span><span class="k">bash</span>
-<span class="n">starcluster</span> <span class="n">start</span> <span class="o">-</span><span class="n">c</span> <span class="n">pyec2</span> <span class="o">-</span><span class="n">s</span> <span class="mi">1</span> <span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">spot</span><span class="o">-</span><span class="n">master</span> <span class="o">-</span><span class="n">b</span> <span class="mf">0.5</span> <span class="o">-</span><span class="n">I</span> <span class="n">c3</span><span class="o">.</span><span class="mi">2</span><span class="n">xlarge</span> <span class="n">singlenode</span>
+<span class="n">starcluster</span> <span class="n">start</span> <span class="o">-</span><span class="n">s</span> <span class="mi">1</span> <span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">spot</span><span class="o">-</span><span class="n">master</span> <span class="o">-</span><span class="n">b</span> <span class="mf">0.5</span> <span class="o">-</span><span class="n">I</span> <span class="n">c3</span><span class="o">.</span><span class="mi">2</span><span class="n">xlarge</span> <span class="n">singlenode</span>
 </pre></div>
 
 </div>
@@ -2501,7 +2606,7 @@ In&nbsp;[]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Most suitable for cross-validation and hyperparameters optimizations, which are intrinsecally trivially parallel jobs</li>
-<li>Example taken from: http://nbviewer.ipython.org/github/ogrisel/parallel_ml_tutorial/blob/master/solutions/03%20-%20Distributed%20Model%20Selection%20and%20Assessment.ipynb</li>
+<li>Based on <a href="http://nbviewer.ipython.org/github/ogrisel/parallel_ml_tutorial/blob/master/solutions/03%20-%20Distributed%20Model%20Selection%20and%20Assessment.ipynb">Olivier Grisel ML tutorial</a></li>
 </ul>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2532,7 +2637,7 @@ In&nbsp;[]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Distributed-scikit-learn-on-EC2-with-IPython-parallel:-Distribute-Cross-Validation">Distributed scikit-learn on EC2 with IPython parallel: Distribute Cross-Validation<a class="anchor-link" href="#Distributed-scikit-learn-on-EC2-with-IPython-parallel:-Distribute-Cross-Validation">&#182;</a></h1>
 </div>
-</section><section>
+
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Open IPython Notebook on the master node</li>
@@ -2803,7 +2908,7 @@ In&nbsp;[]:
     
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Oliver Grisel has scripts for automating the distribution of tasks, see <code>model_selection.RandomizedGridSeach</code>: https://github.com/ogrisel/parallel_ml_tutorial/</li>
+<li>Oliver Grisel has scripts for automating the distribution of tasks, see <code>model_selection.RandomizedGridSeach</code>: <a href="https://github.com/ogrisel/parallel_ml_tutorial/">https://github.com/ogrisel/parallel_ml_tutorial/</a></li>
 </ul>
 </div>
     </div></section>
@@ -2816,7 +2921,7 @@ In&nbsp;[]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Based on OpenStack</li>
-<li>Storage (like S3) already available also to Industry: https://cloud.sdsc.edu</li>
+<li>Storage (like S3) already available also to Industry: <a href="https://cloud.sdsc.edu">cloud.sdsc.edu</a></li>
 <li>In the next few months also cloud instances (like EC2) based on OpenStack Nova</li>
 <li>Local support from SDSC staff <img src="screenshots/sdsc_cloud.png" /></li>
 </ul>
@@ -3039,6 +3144,7 @@ Reveal.initialize({
 controls: true,
 progress: true,
 history: true,
+rollingLinks: false,
 
 theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
